@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace EB.DOTS.HSM.Editor
+namespace EB.GameHSM.Editor
 {
     [CustomEditor(typeof(HsmBoot))]
     public class HsmBootEditor : UnityEditor.Editor
@@ -21,7 +21,7 @@ namespace EB.DOTS.HSM.Editor
                     try { return a.GetTypes(); } 
                     catch { return Type.EmptyTypes; }
                 })
-                .Where(t => typeof(ISubState<HsmRoot>).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface)
+                .Where(t => typeof(ISubGameState<GameHsmRoot>).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface)
                 .OrderBy(t => t.Name)
                 .ToList();
 

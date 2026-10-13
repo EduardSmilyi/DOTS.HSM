@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EB.DOTS.HSM
+namespace EB.GameHSM
 {
     public class HsmBoot : MonoBehaviour
     {
@@ -30,7 +30,7 @@ namespace EB.DOTS.HSM
 
             try
             {
-                if (Activator.CreateInstance(type) is ISubState<HsmRoot> state)
+                if (Activator.CreateInstance(type) is ISubGameState<GameHsmRoot> state)
                 {
                     HsmTools.InitHsm(state);
                 }

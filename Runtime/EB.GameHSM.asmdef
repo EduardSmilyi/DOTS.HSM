@@ -1,12 +1,11 @@
 ﻿{
-    "name": "EB.DOTS.HSM.Editor",
-    "rootNamespace": "EB.DOTS.HSM.Editor",
+    "name": "EB.GameHSM",
+    "rootNamespace": "EB.GameHSM",
     "references": [
-        "EB.DOTS.HSM"
+        "GUID:734d92eba21c94caba915361bd5ac177",
+        "GUID:e0cd26848372d4e5c891c569017e11f1"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -1,24 +1,22 @@
-﻿using Unity.Entities;
-using UnityEngine;
+﻿using System;
 
-namespace EB.DOTS.HSM
+namespace EB.GameHSM
 {
-    public class SceneTransitionState : BaseSubState<SceneTransitionState, HsmRoot>
+    public class SceneTransitionGameState : BaseGameState<SceneTransitionGameState, GameHsmRoot>
     {
         private string _sceneName;
-        private ISubState<HsmRoot> _nextState;
-        private AsyncOperation _sceneLoadingOperation;
+        private Func<ISubGameState<GameHsmRoot>> _nextStateBuilder;
 
-        public SceneTransitionState(string sceneName, ISubState<HsmRoot> nextState)
+        public SceneTransitionGameState(string sceneName, Func<ISubGameState<GameHsmRoot>> nextStateBuilder)
         {
             _sceneName = sceneName;
-            _nextState = nextState;
+            _nextStateBuilder = nextStateBuilder;
         }
 
-        protected override void OnEnter(SystemBase system)
+        public override void OnEnter()
         {
-            _sceneLoadingOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(_sceneName);
-            _sceneLoadingOperation.completed += (_) => SetState(_nextState);
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(_sceneName)
+            .completed += (_) => SetState(_nextStateBuilder());
         }
     }
 }
